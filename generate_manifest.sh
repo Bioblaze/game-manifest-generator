@@ -14,4 +14,4 @@ echo "#################################"
 echo "#        Building Manifest      #"
 echo "#################################"
 
-python manifest_creator.py --t 3 --output_folder $OutputDir  --dir ${input_folder} --export ${output_file} --build ${version}
+python /root/manifest_creator.py --t 3 --output_folder $OutputDir  --dir ${input_folder} --export ${output_file} --build ${version}
