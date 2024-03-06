@@ -1,0 +1,29 @@
+name: 'GameDev Manifest Generator'
+author: Randolph William Aarseth II <randolph@divine.games>
+description: 'Builds Manifest File for Game Files, to be used in downloaders, etc.'
+branding:
+  icon: 'briefcase'
+  color: 'green'
+inputs:
+  version:
+    required: true
+    default: ''
+    description: 'Version for the Manifest that is to be Generated'
+  output_file:
+    required: true
+    default: ''
+    description: 'Filename of the json file for the Manifest'
+  output_folder:
+    required: true
+    description: 'Folder to put the Manifest json file after it has been generated.'
+  input_folder:
+    required: true
+    description: 'Folder to scan to create the Manifest json file.'
+runs:
+  using: "docker"
+  image: Dockerfile
+  env:
+    version: ${{ inputs.build }}
+    output_file: ${{ inputs.output_file }}
+    output_folder: ${{ inputs.output_folder }}
+    input_folder: ${{ inputs.input_folder }}
