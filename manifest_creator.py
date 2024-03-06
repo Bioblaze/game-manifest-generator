@@ -1,7 +1,8 @@
 import sys, os, json, threading, time, argparse, hashlib, datetime
-from colorama import Fore, Style, just_fix_windows_console; from simple_file_checksum import get_checksum; from pathlib import Path
-from os import listdir; from os.path import isfile, join; from timeit import default_timer as timer
-just_fix_windows_console()
+from pathlib import Path
+from os import listdir;
+from os.path import isfile, join; 
+from timeit import default_timer as timer
 
 #constants
 max_threads = 0; directory_to_scan = ""; lock = threading.Lock(); debug = False; export = False
@@ -71,19 +72,19 @@ def ThreadManager():
 class Logger:
     def Success(text):
         with lock:
-            print(f'({Fore.LIGHTGREEN_EX}+{Fore.WHITE}) {text}')
+            print(f'(+) {text}')
     
     def Error(text):
         with lock:
-            print(f'({Fore.RED}-{Fore.WHITE}) {text}')
+            print(f'(-) {text}')
     
     def Info(text):
         with lock:
-            print(f'({Fore.YELLOW}!{Fore.WHITE}) {text}')
+            print(f'(!) {text}')
     
     def Debug(text):
         with lock:
-            print(f'[DEBUG] ({Fore.LIGHTBLUE_EX}*{Fore.WHITE}) {text}')
+            print(f'[DEBUG] (*) {text}')
     
 class Changer(object):
     def __init__(self):
