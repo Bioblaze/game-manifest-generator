@@ -178,7 +178,7 @@ class Changer(object):
             for readFile in self.files:
                 print(f'--\nfilename: {readFile["name"]}\nfilesize: {readFile["size"]}\nchecksum: {readFile["checksum"]}\nprocessing time: {readFile["processing_time"]}\n--\n')
             Logger.Success(f'Successfully read checksum of {self.total} files.')
-        os._exit(1)
+        os._exit(0)
 
 def ChecksumScanner():
     global max_threads, directory_to_scan, args, export, debug
