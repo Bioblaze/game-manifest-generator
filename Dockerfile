@@ -24,11 +24,6 @@ COPY manifest_creator.py .
 
 USER root
 
-# For Debian/Ubuntu based containers
-RUN apt-get update && \
-    apt-get install -y python && \
-    rm -rf /var/lib/apt/lists/*
-
 # Make sure your scripts are executable
 RUN chmod +x generate_manifest.sh
 RUN chmod +x manifest_creator.py
