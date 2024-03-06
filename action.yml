@@ -1,5 +1,5 @@
 name: 'GameDev Manifest Generator'
-author: Randolph William Aarseth II <randolph@divine.games>
+author: 'Bioblaze'
 description: 'Builds Manifest File for Game Files, to be used in downloaders, etc.'
 branding:
   icon: 'briefcase'
