@@ -8,7 +8,8 @@ IFS=$'\n\t'
 : ${output_folder:?}
 : ${input_folder:?}
 
-OutputDir=${output_folder:-.}
+OutputDir=$(pwd)/${output_folder:-.}
+InputDir=$(pwd)/${input_folder:-.}
 
 echo "#################################"
 echo "#        Building Manifest      #"
@@ -16,5 +17,6 @@ echo "#################################"
 
 echo "Exporting to: ${OutputDir}"
 echo "Exporting as: ${output_file}"
+echo "Generating for Folder: ${InputDir}"
 
-python /root/manifest_creator.py --t 3 --output_folder $OutputDir  --dir ${input_folder} --export ${output_file} --build ${version}
+python /root/manifest_creator.py --t 4 --output_folder $OutputDir  --directory ${InputDir} --export ${output_file} --build ${version}
