@@ -8,10 +8,10 @@ IFS=$'\n\t'
 : ${output_folder:?}
 : ${input_folder:?}
 
-OutputDir=$(pwd)/${output_folder}
+OutputDir=$(pwd)/${output_folder:-.}
 
 echo "#################################"
 echo "#        Building Manifest      #"
 echo "#################################"
 
-python manifest_creator.py --t 3 --output_folder ${OutputDir}  --dir ${input_folder} --export ${output_file} --build ${version}
+python manifest_creator.py --t 3 --output_folder $OutputDir  --dir ${input_folder} --export ${output_file} --build ${version}

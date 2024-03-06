@@ -18,6 +18,9 @@ LABEL "com.github.actions.icon"="loader"
 LABEL "com.github.actions.color"="blue"
 
 
+# Set the working directory to /root
+WORKDIR /root/
+
 # Copy the required files into the container
 COPY generate_manifest.sh .
 COPY manifest_creator.py .
@@ -29,4 +32,4 @@ RUN chmod +x generate_manifest.sh
 RUN chmod +x manifest_creator.py
 
 # Set the entrypoint to your deployment script
-ENTRYPOINT ["./generate_manifest.sh"]
+ENTRYPOINT ["/root/generate_manifest.sh"]
