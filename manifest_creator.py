@@ -13,6 +13,8 @@ parser.add_argument("-d", "--debug", help="Enable debugging.", action="store_tru
 parser.add_argument("-b", "--build", help="Add a build to the manifest.", type=str, required=True)
 parser.add_argument("-e", "--export", help="Exports the output. If not, just prints the checksum. Must provide manifest filename", type=str, required=True)
 parser.add_argument("-o", "--output_folder", help="Writes the export into a specific folder", type=str, required=True)
+parser.add_argument("-base", "--base_path", help="Base Directory from CDN to file", type=str, required=True)
+parser.add_argument("-cdn", "--cdn", help="CDN url", type=str, required=True)
 args = parser.parse_args()
 
 def IsVersionProvided():
@@ -26,6 +28,12 @@ def GetVersion():
 
 def GetManifestName():
     return args.export
+
+def GetBasePath():
+    return args.base_path
+
+def GetCDNUrl():
+    return args.cdn
 
 def EnsureOutputFolderExists():
     """
@@ -101,8 +109,9 @@ class Changer(object):
             return { 'total': size, 'number': round(size/(pow(1024,2)), 2), 'type': 'MB' }
         elif size < pow(1024,4):
             return { 'total': size, 'number': round(size/(pow(1024,3)), 2), 'type': 'GB' }
-    
+        
     def generate_checksum(self, filePath):
+        global directory_to_scan
         FiveMB = 5 * 1024 * 1024
         fileName = '/' + os.path.relpath(filePath).replace('\\', '/')
         fileSize = self.GetFileSize(Path(filePath).stat().st_size)
@@ -121,9 +130,10 @@ class Changer(object):
         sha256 = hashlib.sha256()
         sha256.update(data)
         end = timer()
-        self.files.append({ 'path': fileName, 'size': fileSize, 'checksum': str(sha256.hexdigest()), 'processing_time': end - start})
+        # Now 'fileName' holds just the name of the file, without the path
+        self.files.append({ 'path': os.path.relpath(filePath, directory_to_scan), 'file': os.path.basename(fileName), 'size': fileSize, 'checksum': str(sha256.hexdigest()), 'processing_time': end - start})
         return True
-        
+
     def GetAllFiles(self):
         global directory_to_scan
         file_list = []
@@ -156,7 +166,9 @@ class Changer(object):
             outputJson = {
                 'build_number': build__number,
                 'total': self.total,
-                'main_dir': directory_to_scan.replace('\\', '/'),
+                'cdn': GetCDNUrl(),
+                #'main_dir': directory_to_scan.replace('\\', '/'),
+                'base_path': GetBasePath().replace('\\', '/'),
                 'files': self.files
             }
             manifest__name = GetManifestName()

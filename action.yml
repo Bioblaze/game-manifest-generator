@@ -19,6 +19,14 @@ inputs:
   input_folder:
     required: true
     description: 'Folder to scan to create the Manifest json file.'
+  base_path:
+    required: true
+    default: ''
+    description: 'Base Path for the CDN to the Downloads'
+  cdn:
+    required: true
+    default: ''
+    description: 'CDN URL'
 runs:
   using: "docker"
   image: Dockerfile
