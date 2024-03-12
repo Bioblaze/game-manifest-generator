@@ -31,7 +31,9 @@ runs:
   using: "docker"
   image: Dockerfile
   env:
-    version: ${{ inputs.build }}
+    version: ${{ inputs.version }}
     output_file: ${{ inputs.output_file }}
     output_folder: ${{ inputs.output_folder }}
     input_folder: ${{ inputs.input_folder }}
+    base_path: ${{ inputs.base_path }}
+    cdn: ${{ inputs.cdn }}
