@@ -20,7 +20,7 @@ input_folder=$(get_var "input_folder")
 base_path=$(get_var "base_path")
 cdn=$(get_var "cdn")
 
-echo "Debug: ${version} | ${output_file} | ${output_folder} | ${input_folder} | ${base_path} | ${cdn}"
+# echo "Debug: ${version} | ${output_file} | ${output_folder} | ${input_folder} | ${base_path} | ${cdn}"
 
 # Ensure required envs are set
 : ${version:?}
