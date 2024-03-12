@@ -2,6 +2,8 @@
 set -euo pipefail
 IFS=$'\n\t'
 
+echo "Debug: ${version} | ${output_file} | ${output_folder} | ${input_folder} | ${base_path} | ${cdn}"
+
 # Ensure required envs are set
 : ${version:?}
 : ${output_file:?}
